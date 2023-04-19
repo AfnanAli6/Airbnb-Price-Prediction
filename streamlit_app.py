@@ -72,7 +72,7 @@ def predict_price(host_response_rate, host_acceptance_rate, host_is_superhost, h
     except:
         response_category_index = -1
         
-    get_data_columns()
+    __data_columns = get_data_columns()
     x = np.zeros(len(__data_columns))
     
     x[0] = host_response_rate
