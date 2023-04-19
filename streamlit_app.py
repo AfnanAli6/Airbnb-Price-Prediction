@@ -41,8 +41,11 @@ def load_saved_artifacts():
 
 
 def get_data_columns():
-    with open(r"https://github.com/AfnanAli6/Airbnb-Price-Prediction/blob/main/columns.json", "r") as f:
-        __data_columns = json.load(f)['data_columns']
+    __data_columns = ["host_response_rate", "host_acceptance_rate", "host_is_superhost", "host_identity_verified", "latitude", 
+                      "longitude", "accommodates", "bedrooms", "beds", "minimum_nights", "maximum_nights", "availability_30", 
+                      "availability_365", "review_scores_cleanliness", "review_scores_checkin", "review_scores_communication", 
+                      "review_scores_location", "instant_bookable", "bathrooms", "bronx", "brooklyn", "manhattan", "queens", 
+                      "staten island", "entire home/apt", "hotel room", "shared room", "within a day", "within a few hours", "within an hour", "polarity score"]
     return __data_columns
 
 
