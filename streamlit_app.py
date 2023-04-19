@@ -202,7 +202,7 @@ def main():
         address = st.text_input("Enter place/building name or nearest landmark :", 'New York City')
 
     # Convert address to latitude and longitude
-        geolocator = Nominatim(user_agent="geoapiExercises")
+        geolocator = Nominatim(user_agent = "streamlit_app.py")
         location = geolocator.geocode(address)
         if location is not None:
             latitude = round(location.latitude, 5)
