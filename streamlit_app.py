@@ -25,6 +25,26 @@ __data_columns = None
 __model = None
 
 
+def load_saved_artifacts():
+    print("loading saved artifacts...start")
+    global  __data_columns
+
+    with open(r"https://github.com/AfnanAli6/Airbnb-Price-Prediction/blob/main/columns.json", "r") as f:
+        __data_columns = json.load(f)['data_columns']
+
+    global __model
+    if __model is None:
+        with open(r'https://github.com/AfnanAli6/Airbnb-Price-Prediction/blob/main/Airbnb_Rental_Price_Prediction_Tuned_XGBoost_Model.pkl', 'rb') as f:
+            __model = pickle.load(f)
+    print("loading saved artifacts...done")
+
+
+
+def get_data_columns():
+    return __data_columns
+
+
+  
 # creating a function for Prediction
 
 def predict_price(host_response_rate, host_acceptance_rate, host_is_superhost, host_identity_verified, latitude, longitude, accommodates,
@@ -83,26 +103,6 @@ def predict_price(host_response_rate, host_acceptance_rate, host_is_superhost, h
     predicted_log_price = round(__model.predict([x])[0],2)
     reversed_log_price = np.exp(predicted_log_price)  
     return reversed_log_price
-
-
-
-def load_saved_artifacts():
-    print("loading saved artifacts...start")
-    global  __data_columns
-
-    with open(r"https://github.com/AfnanAli6/Airbnb-Price-Prediction/blob/main/columns.json", "r") as f:
-        __data_columns = json.load(f)['data_columns']
-
-    global __model
-    if __model is None:
-        with open(r'https://github.com/AfnanAli6/Airbnb-Price-Prediction/blob/main/Airbnb_Rental_Price_Prediction_Tuned_XGBoost_Model.pkl', 'rb') as f:
-            __model = pickle.load(f)
-    print("loading saved artifacts...done")
-
-
-
-def get_data_columns():
-    return __data_columns
 
 
 
