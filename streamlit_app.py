@@ -162,7 +162,7 @@ def main():
         
         st.subheader("")
         variable = get_data_columns()
-        print(variable)
+        st.markdown(variable)
         st.markdown("##### Section A: input host information below based on your listing setting")
     
         #st.markdown("# Hello")
