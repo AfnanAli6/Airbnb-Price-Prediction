@@ -41,6 +41,8 @@ def load_saved_artifacts():
 
 
 def get_data_columns():
+    with open(r"https://github.com/AfnanAli6/Airbnb-Price-Prediction/blob/main/columns.json", "r") as f:
+        __data_columns = json.load(f)['data_columns']
     return __data_columns
 
 
