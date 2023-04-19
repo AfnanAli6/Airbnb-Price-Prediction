@@ -21,7 +21,7 @@ from geopy.geocoders import Nominatim
 import folium
 
 __locations = None
-__data_columns = []
+__data_columns = None
 __model = None
 
 
@@ -67,7 +67,7 @@ def predict_price(host_response_rate, host_acceptance_rate, host_is_superhost, h
     except:
         response_category_index = -1
         
-    
+    get_data_columns()
     x = np.zeros(len(__data_columns))
     
     x[0] = host_response_rate
@@ -304,7 +304,7 @@ def main():
         
     # creating a button for Prediction
         if st.button('Predict Rental Price'):
-        
+            get_data_columns()
             price = predict_price(response_rate_val, acceptance_rate_val, host_is_superhost_bool, host_identity_verified_bool, latitude,
                                   longitude, accommodates_val, bedrooms_val, beds_val, min_nights_val, max_nights_val, availability_30_val,
                                   availability_365_val, review_scores_cleanliness, review_scores_checkin, review_scores_communication,
