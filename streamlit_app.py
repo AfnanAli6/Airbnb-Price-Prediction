@@ -203,7 +203,7 @@ def main():
 
     # Convert address to latitude and longitude
         geolocator = Nominatim(user_agent = "streamlit_app.py")
-        location = geolocator.geocode(address)
+        location = geolocator.geocode(address, timeout=30)
         if location is not None:
             latitude = round(location.latitude, 5)
             longitude = round(location.longitude, 5)
