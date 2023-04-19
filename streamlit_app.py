@@ -21,7 +21,7 @@ from geopy.geocoders import Nominatim
 import folium
 
 __locations = None
-__data_columns = None
+__data_columns = []
 __model = None
 
 
