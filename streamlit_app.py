@@ -13,7 +13,7 @@ from streamlit_option_menu import option_menu
 from PIL import Image
 import re
 import numpy as np
-import urllib.request
+import requests
 
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from langdetect import detect
@@ -42,9 +42,13 @@ def load_saved_artifacts():
         # The URL of the .pickle file on GitHub
         url = 'https://raw.githubusercontent.com/AfnanAli6/Airbnb-Price-Prediction/main/Airbnb_Rental_Price_Prediction_Tuned_XGBoost_Model.pkl'
         
-        # Download the .pickle file from the URL
-        with urllib.request.urlopen(url) as f:
-            model_pickle = f.read()
+        
+        
+        # Send a GET request to the URL and store the response object
+        response = requests.get(url)
+
+        # Load the response content as bytes using response.content
+        model_pickle = response.content
 
         # Load the .pickle file using pickle.load()
         __model = pickle.loads(model_pickle)
