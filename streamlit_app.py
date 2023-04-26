@@ -34,23 +34,21 @@ def load_saved_artifacts():
         __data_columns = json.load(f)['data_columns']
 
     global __model
-    if __model is None:       
-        # The URL of the .pickle file on GitHub
-        url = "https://raw.githubusercontent.com/your_username/your_repository/main/model.pickle"
+    if __model is None:
+        
+#         with open(r'C:\Users\Afnan Ali\FYP Project\Airbnb_Rental_Price_Prediction_Tuned_XGBoost_Model.pkl', 'rb') as f:
+#             __model = pickle.load(f)
 
+        # The URL of the .pickle file on GitHub
+        url = 'https://raw.githubusercontent.com/AfnanAli6/Airbnb-Price-Prediction/main/Airbnb_Rental_Price_Prediction_Tuned_XGBoost_Model.pkl'
+        
         # Download the .pickle file from the URL
         with urllib.request.urlopen(url) as f:
             model_pickle = f.read()
 
         # Load the .pickle file using pickle.load()
         __model = pickle.loads(model_pickle)
-        
-        
-        
-        
-        #with open(r'..\Airbnb_Rental_Price_Prediction_Tuned_XGBoost_Model.pkl', 'rb') as f:
-            #__model = pickle.load(f)
-            
+                    
         print("loading saved artifacts...done")
 
 
