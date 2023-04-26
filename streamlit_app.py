@@ -14,6 +14,9 @@ from PIL import Image
 import re
 import numpy as np
 
+import requests
+import io
+
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from langdetect import detect
 
@@ -35,23 +38,18 @@ def load_saved_artifacts():
     global __model
     if __model is None:
         
-        with open(r'Airbnb_Rental_Price_Prediction_Tuned_XGBoost_Model.pkl', 'rb') as f:
-            __model = pickle.load(f)
+        
+#         with open(r'Airbnb_Rental_Price_Prediction_Tuned_XGBoost_Model.pkl', 'rb') as f:
+#             __model = pickle.load(f)
 
 #         # The URL of the .pickle file on GitHub
-#         url = 'https://raw.githubusercontent.com/AfnanAli6/Airbnb-Price-Prediction/main/Airbnb_Rental_Price_Prediction_Tuned_XGBoost_Model.pkl'
-        
-        
-        
-#         # Send a GET request to the URL and store the response object
-#         response = requests.get(url)
-
-#         # Load the response content as bytes using response.content
-#         model_pickle = response.content
-
-#         # Load the .pickle file using pickle.load()
-#         __model = pickle.loads(model_pickle)
-                    
+        url = 'https://github.com/AfnanAli6/Airbnb-Price-Prediction/raw/main/Airbnb_Rental_Price_Prediction_Tuned_XGBoost_Model.pkl'
+    
+        # Replace 'username' and 'repo' with your Github username and repository name respectively
+        response = requests.get(url)
+        content = response.content
+        file = io.BytesIO(content)
+        __model = pickle.load(file)
         print("loading saved artifacts...done")
 
 
