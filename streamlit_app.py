@@ -220,23 +220,42 @@ def main():
     
     # Input address from the user
         address = st.text_input("Enter place/building name or nearest landmark :", 'New York City')
-
-    # Convert address to latitude and longitude
-        geolocator = Nominatim(user_agent = "streamlit_app.py")
-        location = geolocator.geocode(address, timeout=30)
+            
+     # Convert address to latitude and longitude
+        geolocator = Nominatim(user_agent="streamlit_app.py")
+        location = geolocator.geocode(address)
         if location is not None:
             latitude = round(location.latitude, 5)
             longitude = round(location.longitude, 5)
             st.write("Location:", location)
             st.write("Latitude:", latitude)
             st.write("Longitude:", longitude)
+            
+                # Check if the latitude and longitude are within the region of New York City
+            nyc_region = {
+                'min_lat': 40.4774,
+                'max_lat': 40.9176,
+                'min_lon': -74.2591,
+                'max_lon': -73.7002
+                }
+
+            if nyc_region['min_lat'] <= latitude <= nyc_region['max_lat'] and \
+                nyc_region['min_lon'] <= longitude <= nyc_region['max_lon']:
+                st.write("The location entered is an existing place in New York City.")
+            else:
+                st.write("The location entered is outside the region of New York City.")
+                st.write("Please re-enter a location within the region!")
+                latitude = 40.71273
+                longitude = -74.00602
+                default_location = 'New York City'
+                st.write("Default location has been set as: ", default_location)
         
         else:
             st.write("Not found, please try different landmark!")
             latitude = 40.71273
             longitude = -74.00602
             default_location = 'New York City'
-            st.write("Current Location: ", default_location)
+            st.write("Default location has been set as: ", default_location)
             st.write("Latitude:", latitude)
             st.write("Longitude:", longitude)
     
